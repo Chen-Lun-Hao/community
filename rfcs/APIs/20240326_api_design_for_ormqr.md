@@ -8,6 +8,10 @@
 | 依赖飞桨版本 | develop                          |
 | 文件名       | 20240326_api_design_for_ormqr.md |
 
+**修订记录**
+
+v2.0 修改函数命名
+
 # 一、概述
 
 ## 1、相关背景
@@ -428,15 +432,15 @@ paddle 目前的算子已经支持矩阵的转置,行列计算等操作，因此
 添加 Python API:
 
 ```python
-paddle.orqmr(input, tau, other, left=True, transpose=False)
+paddle.orqmr(x, tau, y, left=True, transpose=False)
 ```
 
 参数表：
 
-- input: (Tensor) shape（\*，mn，k），当 left 为 True 时， mn 的值等于 m，否则 mn 的值等于 n。 \*表示 Tensor 在轴 0 上的长度为 0 或者大于 0。
-- tau: (Tensor) shape（\*，min（mn，k）），其中 \_ 表示 Tensor 在轴 0 上的长度为 0 或者大于 0，其类型与 input 相同。
-- other: (Tensor) shape（\*，m，n），其中 \* 表示 Tensor 在轴 0 上的长度为 0 或者大于 0，其类型与 input 相同。
-- left: (bool, 可选) 决定了矩阵乘积运算的顺序。如果 left 为 True ，计算顺序为 op(Q) ∗ other ，否则，计算顺序为 other \* op(Q)。默认值：True。
+- x: (Tensor) shape（\*，mn，k），当 left 为 True 时， mn 的值等于 m，否则 mn 的值等于 n。 \*表示 Tensor 在轴 0 上的长度为 0 或者大于 0。
+- tau: (Tensor) shape（\*，min（mn，k）），其中 \_ 表示 Tensor 在轴 0 上的长度为 0 或者大于 0，其类型与 x 相同。
+- y: (Tensor) shape（\*，m，n），其中 \* 表示 Tensor 在轴 0 上的长度为 0 或者大于 0，其类型与 input 相同。
+- left: (bool, 可选) 决定了矩阵乘积运算的顺序。如果 left 为 True ，计算顺序为 op(Q) ∗ y，否则，计算顺序为 other \* op(Q)。默认值：True。
 - transpose: (bool, 可选) 如果为 True ，对矩阵 Q 进行共轭转置变换，否则，不对矩阵 Q 进行共轭转置变换。默认值： False。
 
 ## 底层 OP 设计
